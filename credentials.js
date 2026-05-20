@@ -1,12 +1,19 @@
 const authorizedUsers = {
   "estelle": "Estelle2026!",
   "rad":"rjBCP001",
-  "candice":"cmBCP002",
-  "ilze":"ijvvBCP003",
-  "hannes":"hvNetworks001",
-  "marius":"mkNetworks002",
+  "hannes":"hvBCP002",
+  "candice":"cmBCP003",
+  "ilze":"ibBCP004",
   "eugene":"esGlobe001",
   "lucien":"lbGlobe002",
-
-
+  "bennie":"bjGlobe003",
+  "carmin":"coGlobe004",
+  "zenobia":"zgGlobe005",
+  "wayne":"wbGlobe006",
+  "wesley":"wbGlobe007",
+  "alwyn":"adMSP001",
+  "riaan":"rvsMSP002",
+  "danie":"dvzMSP003",
+  "marius":"mkNet001",
+  "cobus":"cwGlobe008"
 };
