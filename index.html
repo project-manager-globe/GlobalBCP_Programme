@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Global BCP Project Update</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://ictlabs.io/assets/img/logo/favicon.png">
+    <link rel="icon" href="roll.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Squada+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Squada+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/app/commons.css?buildId=2023031500"/>
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/app/main.css?buildId=2023031500"/>
+    <link rel="stylesheet" href="css/style1.css">
+    <link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/light.css?buildId=2023031500"/>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
+    <script src="./credentials.js"></script>
+
+    <style>
+        /* Security Overlay Styling */
+        #loginOverlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #0B2147;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            color: white;
+            font-family: 'EB Garamond', serif;
+        }
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            color: #333;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 400px;
+            width: 90%;
+        }
+        #userName {
+            width: 100%;
+            border: 1px solid #DADCE0;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .pass-wrapper { 
+            position: relative; 
+            width: 100%; 
+            display: block; 
+        }
+        #passInput {
+            width: 100%;
+            border: 1px solid #DADCE0;
+            border-radius: 6px;
+            padding: 12px;
+            padding-right: 45px; 
+            font-size: 16px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%; 
+            transform: translateY(-70%); 
+            cursor: pointer;
+            color: #666;
+            z-index: 10; 
+            width: 22px;
+            height: 22px;
+            transition: color 0.2s;
+        }
+        .toggle-password:hover {
+            color: #1a1b48;
+        }
+        .login-box button {
+            background: #505152;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .login-box button:hover { background: #1a1b48; }
+        #protectedContent { display: none; }
+    </style>
+</head>
+
+<body class="wh_main_page">
+
+    <div id="loginOverlay">
+        <div class="login-box">
+            <img src="img/Global_BCP_Logo.png" height="60px" alt="Global BCP"><br><br>
+            <h2 style="font-weight: bold; color: #0B2147;">BCP Programme Portal</h2>
+            <p style="font-size: 16px; color: #494848;">Enter your credentials to access project insights.</p>
+            
+            <input type="text" id="userName" placeholder="Username" autofocus>
+            
+            <div class="pass-wrapper">
+                <input type="password" id="passInput" placeholder="Password">
+                <svg id="eyeIcon" class="toggle-password" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+            </div>
+            
+            <button onclick="checkPassword()">Verify & Access</button>
+            <p id="errMsg" style="color:#d93025; display:none; font-size:13px; margin-top:15px; font-weight: bold;">⚠️ Access Denied.</p>
+        </div>
+    </div>
+
+    <div id="protectedContent">
+        <header>
+            <div class="topcontainer">
+                <div class="bg-primary">
+                    <nav class="navbar navbar-expand-md fixed-top navbar-dark">
+                        <a class="navbar-brand" href="./index.html"> 
+                            <img src="img/Global_BCP_Logo.png" width="250" height="70" alt="ICTLabs"> 
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <div class="wh_content_area" id="content">
+            <div class="container-fluid wh_content_flex_container">
+                <div class="wh_tiles">
+                    <div class="wh_tile" data-id="about_us">
+                        <div>
+                            <div class="wh_tile_text">
+                                <div class="wh_tile_title"><span class="topicref"><a href="./index.html">MEETING AGENDA</a></span></div>
+                                <div class="wh_tile_shortdesc"> 60 Day Post-Go-live <br> Project Optimization Phase</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wh_tile" data-id="about_us">
+                        <div>
+                            <div class="wh_tile_text">
+                                <div class="wh_tile_title"><span class="topicref"><a href="./index.html">MEETING PURPOSE</a></span></div>
+                                <div class="wh_tile_shortdesc">To facilitate internal alignment and address hurdles.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wh_tile" data-id="about_us">
+                        <div>
+                            <div class="wh_tile_text">
+                                <div class="wh_tile_title"><span class="topicref"><a href="./index.html">MEETING OBJECTIVES</a></span></div>
+                                <div class="wh_tile_shortdesc">Evaluate the transition from "Generalist" to "Specialist".</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="wh_content_area2">
+                <div class="container-fluid wh_content_flex_container">
+                    <div class="wh_tiles">
+                        <div class="wh_tile">
+                            <div class="wh_tile_text">
+                                <div class="wh_tile_title"><span class="topicref"><a href="1_Opening.html">Topic 1: Opening</a></span></div>
+                                <div class="wh_tile_shortdesc">30 Day Review vs Current Status</div>
+                            </div>
+                        </div>
+                        <div class="wh_tile">
+                            <div class="wh_tile_text">
+                                <div class="wh_tile_title"><span class="topicref"><a href="2_Financials.html">Topic 2: Financials</a></span></div>
+                                <div class="wh_tile_shortdesc">Financial Operations & Billing Integrity</div>
+                            </div>
+                        </div>
+                        <div class="wh_tile">
+                            <div class="wh_tile_text">
+                                <div class="wh_tile_title"><span class="topicref"><a href="3_Technical.html">Topic 3: Technical Stuff</a></span></div>
+                                <div class="wh_tile_shortdesc">Technical Infrastructure & Support Flow</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wh_content_area3">
+                <div class="container-fluid wh_content_flex_container">
+                    <div class="wh_tiles">
+                        <div class="wh_tile">
+                            <div class="wh_tile_text">
+                                <div class="wh_tile_title"><span class="topicref"><a href="4_human.html">Topic 4: Human Resources"</a></span></div>
+                                <div class="wh_tile_shortdesc">Staff Adjustment & Culture</div>
+                            </div>
+                        </div>
+                        <div class="wh_tile">
+                            <div class="wh_tile_text">
+                                <div class="wh_tile_title"><span class="topicref"><a href="5_OpenForum.html">OPEN DISCUSSION</a></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const eyeIcon = document.getElementById('eyeIcon');
+        const passInput = document.getElementById('passInput');
+        const nameInput = document.getElementById('userName');
+        const discordWebhookUrl = "https://discord.com/api/webhooks/1506254797320359997/lw5dPJj2Ozris3AU9UiCvUno-iIkCJ2Tsc9AdkDkHxUrc_FG46FuWI9o0jn6oqfgBOmr";
+
+        // SVG Vector Path strings for dynamic state redrawing
+        const openEyePath = `<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />`;
+        const slashedEyePath = `<path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.815 7.815 3 3m-3-3-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />`;
+
+        // Direct Vector Engine Hover Toggles
+        eyeIcon.addEventListener('mouseenter', () => { 
+            passInput.type = 'text'; 
+            eyeIcon.innerHTML = slashedEyePath;
+        });
+        eyeIcon.addEventListener('mouseleave', () => { 
+            passInput.type = 'password'; 
+            eyeIcon.innerHTML = openEyePath;
+        });
+
+        // Authorization Routing & Endpoint Logging
+        function checkPassword() {
+            const u = nameInput.value.trim().toLowerCase();
+            const p = passInput.value;
+            
+            if (typeof authorizedUsers !== 'undefined' && authorizedUsers[u] && authorizedUsers[u] === p) {
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('protectedContent').style.display = 'block';
+                sessionStorage.setItem('isLoggedIn_BCP', 'true');
+
+                // Asynchronous Dispatch to Discord Endpoint
+                fetch(discordWebhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        content: `🔐 **Portal Access Logged**: User \`${u}\` has successfully authorized and opened the Global BCP Programme Portal.`
+                    })
+                }).catch(err => console.error('Webhook metrics push encountered a drop:', err));
+
+            } else {
+                document.getElementById('errMsg').style.display = 'block';
+                passInput.value = '';
+            }
+        }
+
+        // Persistent Session Enforcement Lifecycle Hook
+        window.onload = function() {
+            if (sessionStorage.getItem('isLoggedIn_BCP') === 'true') {
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('protectedContent').style.display = 'block';
+            }
+        };
+
+        // Standard Keyboard Input Triggers
+        [passInput, nameInput].forEach(el => { 
+            el.addEventListener("keyup", (e) => { if (e.key === "Enter") checkPassword(); }); 
+        });
+    </script>
+</body>
+</html>
