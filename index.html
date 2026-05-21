@@ -139,6 +139,17 @@
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
                             <span class="navbar-toggler-icon"></span>
                         </button>
+
+                        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./index.html">Home</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="./videos.html">Videos</a>
+                                </li>
+                            </ul>
+                        </div>
                     </nav>
                 </div>
             </div>
@@ -209,6 +220,16 @@
                             </div>
                         </div>
                         <div class="wh_tile">
+                           <div class="wh_tile_text">
+                               <div class="wh_tile_title">
+                                <span class="topicref">
+                                  <a href="./img/StrategicUnbinding_Video.mp4" target="_blank" rel="noopener noreferrer">Unlocking Growth</a>
+                                 </span>
+                                 </div>
+                               <div class="wh_tile_shortdesc">Post-Merger Alignment</div>
+                           </div>
+                         </div>
+                        <div class="wh_tile">
                             <div class="wh_tile_text">
                                 <div class="wh_tile_title"><span class="topicref"><a href="5_OpenForum.html">OPEN DISCUSSION</a></span></div>
                             </div>
@@ -223,7 +244,9 @@
         const eyeIcon = document.getElementById('eyeIcon');
         const passInput = document.getElementById('passInput');
         const nameInput = document.getElementById('userName');
-        const discordWebhookUrl = "https://discord.com/api/webhooks/1506254797320359997/lw5dPJj2Ozris3AU9UiCvUno-iIkCJ2Tsc9AdkDkHxUrc_FG46FuWI9o0jn6oqfgBOmr";
+        
+        // Secure Formspree Forwarder Endpoint
+        const securityMetricsUrl = "https://formspree.io/f/xgoqagnn";
 
         // SVG Vector Path strings for dynamic state redrawing
         const openEyePath = `<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />`;
@@ -249,14 +272,16 @@
                 document.getElementById('protectedContent').style.display = 'block';
                 sessionStorage.setItem('isLoggedIn_BCP', 'true');
 
-                // Asynchronous Dispatch to Discord Endpoint
-                fetch(discordWebhookUrl, {
+                // Asynchronous Dispatch to Formspree Endpoint Relay
+                fetch(securityMetricsUrl, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                     body: JSON.stringify({
-                        content: `🔐 **Portal Access Logged**: User \`${u}\` has successfully authorized and opened the Global BCP Programme Portal.`
+                        Status: "Portal Access Logged",
+                        AuthorizedUser: u,
+                        Message: `User ${u} has successfully authorized and opened the Global BCP Programme Portal.`
                     })
-                }).catch(err => console.error('Webhook metrics push encountered a drop:', err));
+                }).catch(err => console.error('Metrics push encountered a drop:', err));
 
             } else {
                 document.getElementById('errMsg').style.display = 'block';
