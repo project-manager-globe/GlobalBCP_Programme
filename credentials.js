@@ -15,6 +15,7 @@ const authorizedUsers = {
   "riaan":"rvsMSP002",
   "danie":"dvzMSP003",
   "marius":"mkNet001",
-  "felicity": "fmIngage001",
+  "felicity":"fmIngage001",
+  "guest":"guest2000",
   "cobus":"cwGlobe008"
 };
